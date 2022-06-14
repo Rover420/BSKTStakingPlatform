@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Moralis from 'moralis';
 
 const Nextmonth = () => {
+    
+    const { isInitialized } = useMoralis();
 
     const [token, setToken] = useState();
 
@@ -18,8 +20,10 @@ const Nextmonth = () => {
     }
 
     useEffect(() => {
-        oof();
-    }, []);
+        if(isInitialized) {
+            oof();
+        }
+    }, [isInitialized]);
 
     useEffect(() => {
         try {
