@@ -7,8 +7,6 @@ function MyApp({ Component, pageProps }) {
   const appId = process.env.NEXT_PUBLIC_APP_ID;
   const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
-  Moralis.start({serverUrl, appId});
-
   return ( 
     <MoralisProvider 
       appId={appId}
