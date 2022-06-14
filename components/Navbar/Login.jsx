@@ -11,11 +11,10 @@ const Login = () => {
     const [check, setCheck] = useState(false);
 
     const handleAuth = async () => {
-        let user = await Moralis.User.current();
-        if (!user) {
-            user = await authenticate({signingMessage: "Welcome to BasketCoin staking platform! :>"});
+        if(isInitialized) {
+            await authenticate({signingMessage: "Welcome to BasketCoin staking platform! :>"});
+            await Moralis.enableWeb3();
         }
-        Moralis.enableWeb3();
     }
 
     const handleLogout = async () => {
