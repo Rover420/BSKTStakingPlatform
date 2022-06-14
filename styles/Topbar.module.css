@@ -1,0 +1,22 @@
+.coinbalance {
+    background: linear-gradient(90deg,#46bdf4 0,#2b56f5);
+    font-weight: 500;
+    padding: 0 23px;
+    border-radius: 38px;
+    line-height: 38px;
+    font-weight: 500;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.coinbalance strong {
+    margin-right: 5px;
+}
+
+.TopBar {
+    display: grid;
+    grid-gap: 1rem;
+    grid-auto-flow: column;
+}
