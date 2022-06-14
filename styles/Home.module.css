@@ -270,7 +270,7 @@
 @keyframes hide {
   0% {visibility: visible; top: 40%;}
   20% {top: 50%;}
-  100% {top: -300px; visibility: hidden;}
+  100% {top: -500px; visibility: hidden;}
 }
 
 @media screen and (max-width: 700px) {
