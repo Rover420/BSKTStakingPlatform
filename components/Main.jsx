@@ -153,8 +153,6 @@ const Main = ({ userTokenUnits, userToken, value }) => {
         setTotalDepo(data && data)
   }, [data])
 
-  console.log(value);
-
     return ( 
         <div className={styles.main}>
             <div className={`${styles.container} ${styles.div1}`}>
