@@ -277,6 +277,10 @@
   .inp {
     font-size: 2rem;
   }
+  
+  .main {
+    grid-template-columns: 0.3fr repeat(4, 2fr) 0.3fr;
+  }
 
   .div5 span {
     font-size: 14px;
