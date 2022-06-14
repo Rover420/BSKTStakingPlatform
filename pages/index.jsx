@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { useERC20Balances, useMoralis } from 'react-moralis';
+import { useERC20Balances, useMoralis, useWeb3ExecuteFunction, useApiContract } from 'react-moralis';
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import Moralis from 'moralis';
@@ -13,9 +13,15 @@ export default function Home() {
 
   const {fetchERC20Balances, data} = useERC20Balances();
 
-  const [userToken, setUserToken] = useState();
+  const contractProcessor = useWeb3ExecuteFunction();
+
+  const [userToken, setUserToken] = useState(null);
 
   const [userTokenUnits, setUserTokenUnits] = useState(0);
+
+  const [addr, setAddr] = useState(null);
+
+  const [value, setValue] = useState(null);
 
 
 
@@ -31,6 +37,39 @@ export default function Home() {
         })
     }
   }
+
+  const {
+    runContractFunction,
+  } = useApiContract({
+    address: "0xE0C255a5D89b6D9fedb5C4e43c11341a072e3bcc",
+    functionName: "balanceOf",
+    abi: [{"constant":true,"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}],
+    chain: 'bsc',
+    params: { account: addr }
+  });
+
+  useEffect(() => {
+    if(isAuthenticated && !addr) {
+      setAddr(user.get('ethAddress'))
+    } else {
+      setAddr();
+    }
+  }, [isAuthenticated])
+
+    useEffect(() => {
+      if(addr && !value) runContractFunction({
+        onSuccess: (res) => setValue(parseFloat(Moralis.Units.FromWei(res)).toFixed(2)),
+        onError: (err) => console.log(err),
+      })
+    }, [addr])
+
+    useEffect(() => {
+      if(!isAuthenticated) {
+        setValue();
+      }
+    }, [isAuthenticated])
+
+    console.log(value)
 
 
 
@@ -76,6 +115,7 @@ export default function Home() {
       <Main 
         userToken={userToken} 
         userTokenUnits={userTokenUnits} 
+        value={value}
       />
 
     </>
