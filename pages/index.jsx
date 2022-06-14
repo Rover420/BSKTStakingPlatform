@@ -69,8 +69,6 @@ export default function Home() {
       }
     }, [isAuthenticated])
 
-    console.log(value)
-
 
 
   useEffect(() => {
@@ -84,7 +82,7 @@ export default function Home() {
           setUserToken(zwierzyniec && zwierzyniec[0].balance)
       }
     } catch (err) {
-      console.log(err);
+
     }
   }, [data])
 
