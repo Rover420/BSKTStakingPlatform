@@ -6,23 +6,23 @@ import Unstaked from '../components/Unstaked';
 import Staked from '../components/Staked';
 import Nextmonth from '../components/Nextmonth';
 
-const Main = ({ userTokenUnits, userToken }) => {
+const Main = ({ userTokenUnits, userToken, value }) => {
 
   const { Moralis, isAuthenticated, user, isInitialized } = useMoralis();
 
   const contractProcessor = useWeb3ExecuteFunction();
 
-  const [totalDepo, setTotalDepo] = useState();
+  const [totalDepo, setTotalDepo] = useState(null);
 
-  const [inpValue, setInpValue] = useState();
+  const [inpValue, setInpValue] = useState(null);
 
-  const [UnstakeInpValue, setUnstakeInpValue] = useState();
+  const [UnstakeInpValue, setUnstakeInpValue] = useState(null);
 
   const [disabled, setDisabled] = useState('disabled');
 
   const [unstakeDisabled, setUnstakeDisabled] = useState('disabled');
 
-  const [check, setCheck] = useState();
+  const [check, setCheck] = useState(null);
 
 
 
@@ -154,6 +154,8 @@ const Main = ({ userTokenUnits, userToken }) => {
         setTotalDepo(data && data)
   }, [data])
 
+  console.log(value);
+
     return ( 
         <div className={styles.main}>
             <div className={`${styles.container} ${styles.div1}`}>
@@ -166,7 +168,7 @@ const Main = ({ userTokenUnits, userToken }) => {
             </div>
                 <div className={`${styles.container} ${styles.div3}`}>
                 <span>Staked</span>
-                <Staked />
+                <p>{value ? value + ' BSKT' : '-'}</p>
                 {!isAuthenticated ? '' : <button className={styles.stake} onClick={handleUnstake}>Unstake</button>}
                 {!isAuthenticated ? '' : <button className={`${styles.stake} ${styles.withdraw}`} onClick={handleExit}>Withdraw all</button>}
             </div>
@@ -179,7 +181,8 @@ const Main = ({ userTokenUnits, userToken }) => {
                 <div className={`${styles.container} ${styles.div5}`}>
                 <span>Initial stake requirement of 5000 BSKT. Afterwards, all restrictions are lifted and you may un-stake and re-stake any amount of BSKT token.</span>
                 <input type="number" className={styles.inp} onChange={handleChange} />
-                {inpValue > parseFloat(userTokenUnits) ? <span style={{color: 'red'}}>Your BSKT balance is too low.</span> : ''}
+                {inpValue > parseFloat(userTokenUnits) ? <span style={{color: 'red'}}>Your BSKT balance is too low.</span> : 
+                (((inpValue && (value < 10)) || (inpValue && (value < 10) && (userTokenUnits < 5000))) || (inpValue && ((value + userTokenUnits) < 5000))) ? <span style={{color: 'red'}}>Suck my cock</span> : ''}
                 <button className={styles.btn} disabled={disabled} onClick={handleStake}>Stake</button>
             </div>}
             {check && check != 'unstake' && check != 'hideunstake' ? 
