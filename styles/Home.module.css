@@ -212,6 +212,7 @@
   margin: 0px 20%;
   top: -500px;
   visibility: hidden;
+  transform: translateY(-50%);
 }
 
 .popup h2 {
@@ -259,8 +260,8 @@
 
 @keyframes show {
   0% {visibility: visible; top: -600px;}
-  60% {top: 50%;}
-  100% {top: 40%; visibility: visible;}
+  60% {top: 60%;}
+  100% {top: 50%; visibility: visible;}
 }
 
 .hide {
@@ -268,8 +269,8 @@
 }
 
 @keyframes hide {
-  0% {visibility: visible; top: 40%;}
-  20% {top: 50%;}
+  0% {visibility: visible; top: 50%;}
+  20% {top: 60%;}
   100% {top: -500px; visibility: hidden;}
 }
 
