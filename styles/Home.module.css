@@ -281,6 +281,10 @@
   .main {
     grid-template-columns: 0.3fr repeat(4, 2fr) 0.3fr;
   }
+  
+  .container p {
+    font-size: 20px;
+  }
 
   .div5 span {
     font-size: 14px;
