@@ -63,7 +63,7 @@
 @media screen and (max-width: 1150px) {
   .main {
     grid-template-columns: 1fr repeat(4, 2fr) 1fr;
-    grid-template-rows: 1fr repeat(4, 2fr) 3fr 1fr;
+    grid-template-rows: .2fr repeat(4, 2fr) 3fr 1fr;
   }
 
   .div1 { grid-area: 2 / 2 / 3 / 6; }
