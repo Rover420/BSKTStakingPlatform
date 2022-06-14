@@ -6,7 +6,7 @@ import Moralis from 'moralis';
 
 const Login = () => {
 
-    const { authenticate, isAuthenticated, user, logout, isWeb3Enabled } = useMoralis();
+    const { authenticate, isAuthenticated, user, logout, isWeb3Enabled, isInitialized } = useMoralis();
 
     const [check, setCheck] = useState(false);
 
@@ -19,8 +19,10 @@ const Login = () => {
     }
 
     const handleLogout = async () => {
-        await logout();
-        await Moralis.User.logOut();
+        if(isInitialized) {
+            await logout();
+            await Moralis.User.logOut();
+        }
     }
 
     useEffect(() => {
