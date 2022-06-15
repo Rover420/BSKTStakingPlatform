@@ -13,8 +13,6 @@ export default function Home() {
 
   const {fetchERC20Balances, data} = useERC20Balances();
 
-  const contractProcessor = useWeb3ExecuteFunction();
-
   const [userToken, setUserToken] = useState(null);
 
   const [userTokenUnits, setUserTokenUnits] = useState(0);
@@ -26,7 +24,9 @@ export default function Home() {
   const [timer, setTimer] = useState(0);
 
 
-
+  useEffect(() => {
+    setUserToken(null);
+  }, [])
 
 
   const elo = async () => {
@@ -63,7 +63,7 @@ export default function Home() {
         onSuccess: (res) => setValue(parseFloat(Moralis.Units.FromWei(res)).toFixed(2)),
         onError: (err) => console.log(err),
       })
-    }, [addr])
+    }, [addr, timer])
 
     useEffect(() => {
       if(!isAuthenticated) {
@@ -76,7 +76,7 @@ export default function Home() {
   useEffect(() => {
     elo();
     setTimeout(() => {
-      setTimer(timer + 1)
+      setTimer(timer + 1);
     }, 10000);
   }, [isAuthenticated, timer]);
 
