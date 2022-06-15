@@ -3,6 +3,7 @@ import { useMoralis, useWeb3ExecuteFunction, useApiContract } from 'react-morali
 import React, { useState, useEffect } from 'react';
 import Moralis from 'moralis';
 import Unstaked from '../components/Unstaked';
+import Staked from '../components/Staked';
 import Nextmonth from '../components/Nextmonth';
 
 const Main = ({ userTokenUnits, userToken, value }) => {
@@ -27,6 +28,10 @@ const Main = ({ userTokenUnits, userToken, value }) => {
 
 
   async function claim() {
+    setTimeout(() => {
+      setCheck('hide');
+    }, 5);
+
     let options = {
       contractAddress: '0xE0C255a5D89b6D9fedb5C4e43c11341a072e3bcc',
       functionName: 'getReward',
@@ -36,7 +41,6 @@ const Main = ({ userTokenUnits, userToken, value }) => {
     await contractProcessor.fetch({
       params: options
     })
-
   }
 
   async function handleClaim() {
@@ -64,6 +68,9 @@ const Main = ({ userTokenUnits, userToken, value }) => {
   }
 
   async function unstake() {
+    setTimeout(() => {
+      setCheck('hideunstake');
+    }, 5);
     let options = {
       contractAddress: '0xE0C255a5D89b6D9fedb5C4e43c11341a072e3bcc',
       functionName: 'withdraw',
@@ -76,10 +83,12 @@ const Main = ({ userTokenUnits, userToken, value }) => {
     await contractProcessor.fetch({
       params: options
     })
-
   }
 
   async function exit() {
+    setTimeout(() => {
+      setCheck('hide');
+    }, 5);
     let options = {
       contractAddress: '0xE0C255a5D89b6D9fedb5C4e43c11341a072e3bcc',
       functionName: 'exit',
@@ -89,10 +98,13 @@ const Main = ({ userTokenUnits, userToken, value }) => {
     await contractProcessor.fetch({
       params: options
     })
-
   }
 
   async function stake() {
+    setTimeout(() => {
+      setCheck('hide');
+    }, 5);
+    
     let options = {
       contractAddress: '0xE0C255a5D89b6D9fedb5C4e43c11341a072e3bcc',
       functionName: 'stake',
@@ -105,7 +117,18 @@ const Main = ({ userTokenUnits, userToken, value }) => {
     await contractProcessor.fetch({
       params: options
     })
+  }
 
+  const handleBtns = async () => {
+    if(check === 'claim') {
+      claim();
+    }
+    if(check === 'stake') {
+      stake();
+    }
+    if(check === 'exit') {
+      exit();
+    }
   }
 
   // Get Total Deposits data
@@ -119,8 +142,6 @@ const Main = ({ userTokenUnits, userToken, value }) => {
     abi: [{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}],
     chain: 'bsc',
   });
-
-
 
   const handleChange = (e) => {
     setInpValue(parseFloat(e.target.value))
@@ -165,7 +186,7 @@ const Main = ({ userTokenUnits, userToken, value }) => {
             </div>
                 <div className={`${styles.container} ${styles.div3}`}>
                 <span>Staked</span>
-                <p>{value ? value + ' BSKT' : '-'}</p>
+                <p>{isAuthenticated ? value ? value + ' BSKT' : '-' : '-'}</p>
                 {!isAuthenticated ? '' : <button className={styles.stake} onClick={handleUnstake}>Unstake</button>}
                 {!isAuthenticated ? '' : <button className={`${styles.stake} ${styles.withdraw}`} onClick={handleExit}>Withdraw all</button>}
             </div>
@@ -179,7 +200,7 @@ const Main = ({ userTokenUnits, userToken, value }) => {
                 <span>Initial stake requirement of 5000 BSKT. Afterwards, all restrictions are lifted and you may un-stake and re-stake any amount of BSKT token.</span>
                 <input type="number" className={styles.inp} onChange={handleChange} />
                 {inpValue > parseFloat(userTokenUnits) ? <span style={{color: 'red'}}>Your BSKT balance is too low.</span> : 
-                (((inpValue && (value < 10)) || (inpValue && (value < 10) && (userTokenUnits < 5000))) || (inpValue && ((value + userTokenUnits) < 5000))) ? <span style={{color: 'red'}}>Suck my cock</span> : ''}
+                ((value < 1) || (inpValue && inpValue > 50000)) ? <span style={{color: 'red'}}>Initial stake requirement of 5000 BSKT.</span> : ''}
                 <button className={styles.btn} disabled={disabled} onClick={handleStake}>Stake</button>
             </div>}
             {check && check != 'unstake' && check != 'hideunstake' ? 
@@ -189,11 +210,7 @@ const Main = ({ userTokenUnits, userToken, value }) => {
               <p>Each operation will cost you 2.5% of your transaction value.</p>
               <div className={styles.btnwrapper}>
                 <button className={styles.btn} onClick={hide}>Cancel</button>
-                <button className={styles.btn} onClick={
-                  (check == 'claim') ? claim : 
-                  (check == 'stake') ? stake : 
-                  (check == 'exit') ? exit : 
-                  ''}>Confirm</button>
+                <button className={styles.btn} onClick={handleBtns}>Confirm</button>
               </div>
             </div> :
               <div className={check ? (check == 'hideunstake') ? `${styles.popup} ${styles.hide} ${styles.unstake}` : `${styles.popup} ${styles.show} ${styles.unstake}` : styles.popup}>
