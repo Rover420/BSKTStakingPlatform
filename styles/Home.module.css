@@ -311,5 +311,8 @@
   .popup .inp {
     font-size: 1.5rem;
   }
+  .popup {
+    padding: 0.2rem 2.5rem;
+  }
 }
 
