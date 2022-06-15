@@ -213,7 +213,7 @@
   top: -500px;
   visibility: hidden;
   transform: translateY(-50%);
-  max-height: 80vh;
+  max-height: 90vh;
 }
 
 .popup h2 {
@@ -303,6 +303,7 @@
   }
   .popup p {
     font-size: 14px;
+    margin: 8px 0px;
   }
   .popup .inp {
     font-size: 1.5rem;
