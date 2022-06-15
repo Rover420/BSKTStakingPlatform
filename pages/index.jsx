@@ -23,6 +23,8 @@ export default function Home() {
 
   const [value, setValue] = useState(null);
 
+  const [timer, setTimer] = useState(0);
+
 
 
 
@@ -57,7 +59,7 @@ export default function Home() {
   }, [isAuthenticated])
 
     useEffect(() => {
-      if(addr && !value) runContractFunction({
+      if(addr) runContractFunction({
         onSuccess: (res) => setValue(parseFloat(Moralis.Units.FromWei(res)).toFixed(2)),
         onError: (err) => console.log(err),
       })
@@ -73,22 +75,23 @@ export default function Home() {
 
   useEffect(() => {
     elo();
-  }, [isAuthenticated]);
+    setTimeout(() => {
+      setTimer(timer + 1)
+    }, 10000);
+  }, [isAuthenticated, timer]);
 
   useEffect(() => {
-    try {
-      if(!userToken) {
-          const zwierzyniec = (data && data.filter(token => token.symbol === 'BSKT'))
-          setUserToken(zwierzyniec && zwierzyniec[0].balance)
+     fetchERC20Balances({
+      onSuccess: (res) => {
+        const zwierzyniec = (res && res.filter(token => token.symbol === 'BSKT'));
+        setUserToken(zwierzyniec && zwierzyniec[0].balance);
       }
-    } catch (err) {
-
-    }
-  }, [data])
+     })
+  }, [isAuthenticated, timer])
 
   useEffect(() => {
-    if(!userTokenUnits && userToken) {
-      setUserTokenUnits(parseFloat(Moralis.Units.FromWei(userToken)).toFixed(2))
+    if(userToken) {
+      setUserTokenUnits(parseFloat(Moralis.Units.FromWei(userToken)).toFixed(2));
     }
   }, [userToken])
 
