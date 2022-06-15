@@ -28,6 +28,7 @@
   min-height: 225px;
   text-align: center;
   position: relative;
+  max-height: 80vh;
 }
 
 .container p {
