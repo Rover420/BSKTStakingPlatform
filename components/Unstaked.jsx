@@ -65,7 +65,7 @@ const Unclaimed = () => {
       }, [isAuthenticated])
 
     return ( 
-          <p>{value ? parseFloat(Moralis.Units.FromWei(value)).toFixed(3) + ' BSKT' : '-'}</p>
+          <p>{value ? parseFloat(Moralis.Units.FromWei(value)).toFixed(2) + ' BSKT' : '-'}</p>
      );
 }
  
