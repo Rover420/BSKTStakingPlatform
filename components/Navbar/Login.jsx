@@ -36,7 +36,7 @@ const Login = () => {
         if(!isWeb3Enabled) {
             handleLogout();
         }
-    }, [])
+    }, [isWeb3Enabled, isInitialized])
     
     if(!check) {
         return (
