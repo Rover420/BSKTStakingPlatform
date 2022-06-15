@@ -297,3 +297,15 @@
   }
 }
 
+@media screen and (max-height: 500px) {
+  .popup h2 {
+    font-size: 26px;
+  }
+  .popup p {
+    font-size: 14px;
+  }
+  .popup .inp {
+    font-size: 1.5rem;
+  }
+}
+
