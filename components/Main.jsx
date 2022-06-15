@@ -161,6 +161,9 @@ const Main = ({ userTokenUnits, userToken, value }) => {
     } else {
       setUnstakeDisabled('disabled')
     }
+    if(e.target.value > parseFloat(value)) {
+      setUnstakeDisabled('disabled')
+    }
   }
 
   useEffect(() => {
@@ -220,6 +223,7 @@ const Main = ({ userTokenUnits, userToken, value }) => {
                 </div>
                 <input type="number" className={styles.inp} onChange={unstakeInp} />
                 <button className={styles.btn} onClick={unstake} disabled={unstakeDisabled}>Unstake</button>
+                {UnstakeInpValue && UnstakeInpValue > parseFloat(value) ? <span style={{color: 'red'}}>Your staked balance is too low.</span> : ''}
                 <p>Each transaction will cost you 2.5% of your transaction value.</p>
               </div>}
             
