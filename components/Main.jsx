@@ -3,7 +3,6 @@ import { useMoralis, useWeb3ExecuteFunction, useApiContract } from 'react-morali
 import React, { useState, useEffect } from 'react';
 import Moralis from 'moralis';
 import Unstaked from '../components/Unstaked';
-import Staked from '../components/Staked';
 import Nextmonth from '../components/Nextmonth';
 
 const Main = ({ userTokenUnits, userToken, value }) => {
