@@ -295,6 +295,9 @@
   .div5 span {
     font-size: 16px;
   }
+  .main {
+    padding: 5px;
+  }
 }
 
 @media screen and (max-height: 500px) {
