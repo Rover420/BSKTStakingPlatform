@@ -205,7 +205,7 @@ const Main = ({ userTokenUnits, userToken, value }) => {
                 <span>Initial stake requirement of 5000 BSKT. Afterwards, all restrictions are lifted and you may un-stake and re-stake any amount of BSKT token.</span>
                 <input type="number" className={styles.inp} onChange={handleChange} min='0' max='15000000' pattern='[0-9]*' />
                 {inpValue > parseFloat(userTokenUnits) ? <span style={{color: 'red'}}>Your BSKT balance is too low.</span> : 
-                (inpValue && inpValue < 0 ? <span style={{color: 'red'}}> : Value has to be a positive number.</span>(inpValue && value < 1) || (inpValue && inpValue > 50000)) ? <span style={{color: 'red'}}>Initial stake requirement of 5000 BSKT.</span> : ''}
+                (inpValue && inpValue < 0 ? <span style={{color: 'red'}}>Value has to be a positive number.</span> : (inpValue && value < 1) || (inpValue && inpValue > 50000)) ? <span style={{color: 'red'}}>Initial stake requirement of 5000 BSKT.</span> : ''}
                 <button className={styles.btn} disabled={disabled} onClick={handleStake}>Stake</button>
             </div>}
             {check && check != 'unstake' && check != 'hideunstake' ? 
