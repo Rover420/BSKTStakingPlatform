@@ -4,7 +4,7 @@ import Moralis from 'moralis';
 
 const Nextmonth = () => {
     
-    const { isInitialized } = useMoralis();
+    const { isInitialized, isAuthenticated } = useMoralis();
 
     const [token, setToken] = useState();
 
@@ -23,7 +23,7 @@ const Nextmonth = () => {
         if(isInitialized) {
             oof();
         }
-    }, [isInitialized]);
+    }, [isInitialized, isAuthenticated]);
 
     useEffect(() => {
         try {
