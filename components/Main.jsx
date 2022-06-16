@@ -200,7 +200,7 @@ const Main = ({ userTokenUnits, userToken, value }) => {
                 {!isAuthenticated ? '' : 
                 <div className={`${styles.container} ${styles.div5}`}>
                 <span>Initial stake requirement of 5000 BSKT. Afterwards, all restrictions are lifted and you may un-stake and re-stake any amount of BSKT token.</span>
-                <input type="number" className={styles.inp} onChange={handleChange} maxlength='11' />
+                <input type="number" className={styles.inp} onChange={handleChange} min='0' max='15000000' pattern='[0-9]*' />
                 {inpValue > parseFloat(userTokenUnits) ? <span style={{color: 'red'}}>Your BSKT balance is too low.</span> : 
                 ((inpValue && value < 1) || (inpValue && inpValue > 50000)) ? <span style={{color: 'red'}}>Initial stake requirement of 5000 BSKT.</span> : ''}
                 <button className={styles.btn} disabled={disabled} onClick={handleStake}>Stake</button>
@@ -221,7 +221,7 @@ const Main = ({ userTokenUnits, userToken, value }) => {
                   <h2>Unstake</h2>
                   <p>Enter amount to unstake</p>
                 </div>
-                <input type="number" className={styles.inp} onChange={unstakeInp} maxlength='11' />
+                <input type="number" className={styles.inp} onChange={unstakeInp} min='0' max='15000000' pattern='[0-9]*' />
                 <button className={styles.btn} onClick={unstake} disabled={unstakeDisabled}>Unstake</button>
                 {UnstakeInpValue && UnstakeInpValue > parseFloat(value) ? <span style={{color: 'red'}}>Your staked balance is too low.</span> : ''}
                 <p>Each transaction will cost you 2.5% of your transaction value.</p>
