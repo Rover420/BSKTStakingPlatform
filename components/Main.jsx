@@ -70,18 +70,20 @@ const Main = ({ userTokenUnits, userToken, value }) => {
     setTimeout(() => {
       setCheck('hideunstake');
     }, 5);
-    let options = {
-      contractAddress: '0xE0C255a5D89b6D9fedb5C4e43c11341a072e3bcc',
-      functionName: 'withdraw',
-      abi: [{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}],
-      params: {
-        amount: Moralis.Units.ETH(UnstakeInpValue)
-      },
-    }
+    if(UnstakeInpValue && UnstakeInpValue <= value && UnstakeInpValue > 0) {
+      let options = {
+        contractAddress: '0xE0C255a5D89b6D9fedb5C4e43c11341a072e3bcc',
+        functionName: 'withdraw',
+        abi: [{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}],
+        params: {
+          amount: Moralis.Units.ETH(UnstakeInpValue)
+        },
+      }
 
-    await contractProcessor.fetch({
-      params: options
-    })
+      await contractProcessor.fetch({
+        params: options
+      })
+    }
   }
 
   async function exit() {
@@ -103,19 +105,20 @@ const Main = ({ userTokenUnits, userToken, value }) => {
     setTimeout(() => {
       setCheck('hide');
     }, 5);
-    
-    let options = {
-      contractAddress: '0xE0C255a5D89b6D9fedb5C4e43c11341a072e3bcc',
-      functionName: 'stake',
-      abi: [{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"stake","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}],
-      params: {
-        amount: Moralis.Units.ETH(inpValue)
-      },
-    }
+    if(inpValue && inpValue <= userTokenUnits && inpValue > 0){
+      let options = {
+        contractAddress: '0xE0C255a5D89b6D9fedb5C4e43c11341a072e3bcc',
+        functionName: 'stake',
+        abi: [{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"stake","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}],
+        params: {
+          amount: Moralis.Units.ETH(inpValue)
+        },
+      }
 
-    await contractProcessor.fetch({
-      params: options
-    })
+      await contractProcessor.fetch({
+        params: options
+      })
+    }
   }
 
   const handleBtns = async () => {
