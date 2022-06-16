@@ -172,7 +172,7 @@ const Main = ({ userTokenUnits, userToken, value }) => {
   useEffect(() => {
     if(isInitialized && !data)
         runContractFunction();
-  }, [isInitialized])
+  }, [isInitialized, isAuthenticated])
 
   useEffect(() => {
     if(!totalDepo)
