@@ -299,6 +299,9 @@
   .main {
     padding: 5px;
   }
+  .popup h2 {
+    font-size: 24px;
+  }
 }
 
 @media screen and (max-height: 500px) {
